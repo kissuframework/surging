@@ -14,10 +14,12 @@ using Surging.Core.KestrelHttpServer.Internal;
 using System.IO;
 using Surging.Core.KestrelHttpServer;
 using Surging.Core.Common;
+using Surging.Core.Thrift.Attributes;
+using static ThriftCore.Calculator;
 
 namespace Surging.Modules.Common.Domain
 {
-    [ModuleName("Person")]
+    [ModuleName("Person")] 
     public class PersonService : ProxyServiceBase, IUserService
     {
         #region Implementation of IUserService
@@ -163,6 +165,11 @@ namespace Surging.Modules.Common.Domain
         public async Task<Dictionary<string, object>> GetAllThings()
         {
             return await Task.FromResult(new Dictionary<string, object> { { "aaa", 12 } });
+        }
+
+        public Task<bool> RemoveUser(UserModel user)
+        {
+            return Task.FromResult(true);
         }
 
         #endregion Implementation of IUserService

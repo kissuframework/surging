@@ -37,17 +37,17 @@ namespace Surging.Core.ProxyGenerator.Interceptors.Implementation.Metadatas
         {
             Key = serviceInterceptItem[0];
             L2Key= serviceInterceptItem[1];
-            EnableL2Cache= Convert.ToBoolean(serviceInterceptItem[3]);
-           Enum.TryParse<CacheTargetType>(serviceInterceptItem[4],out CacheTargetType mode);
+            EnableL2Cache = serviceInterceptItem[2] == "1" ? true : false ;
+           Enum.TryParse<CacheTargetType>(serviceInterceptItem[3],out CacheTargetType mode);
             Mode = mode;
-            CacheSectionType = serviceInterceptItem[5];
-                Enum.TryParse<CachingMethod>(serviceInterceptItem[6], out CachingMethod method);
+            CacheSectionType = serviceInterceptItem[4];
+                Enum.TryParse<CachingMethod>(serviceInterceptItem[5], out CachingMethod method);
             Method = method;
-            Force= Convert.ToBoolean(serviceInterceptItem[7]);
-            Time = Convert.ToInt32(serviceInterceptItem[8]);
-            if(!string.IsNullOrEmpty(serviceInterceptItem[9]))
+            Force=  serviceInterceptItem[6]== "1" ? true : false; ;
+            Time = Convert.ToInt32(serviceInterceptItem[7]);
+            if(!string.IsNullOrEmpty(serviceInterceptItem[8]))
             {
-                CorrespondingKeys = serviceInterceptItem[9].Split(",");
+                CorrespondingKeys = serviceInterceptItem[8].Split(",");
             }
         }
         #endregion
@@ -69,23 +69,23 @@ namespace Surging.Core.ProxyGenerator.Interceptors.Implementation.Metadatas
         {
             get;
             set;
-        }
+        } = "";
 
-        public string L2Key
+        public string L2Key 
         {
             get; set;
-        }
+        }= "";
 
         public bool EnableL2Cache
         {
             get; set;
         }
 
-        public string Key { get; set; }
+        public string Key { get; set; } = "";
         /// <summary>
         /// 获取或设置缓存方式。
         /// </summary>
-        public CachingMethod Method { get; set; }
+        public CachingMethod Method { get; set; } 
 
         /// <summary>
         /// 获取或设置一个<see cref="Boolean"/>值，该值表示当缓存方式为Put时，是否强制将值写入缓存中。
